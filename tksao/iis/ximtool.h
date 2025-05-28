@@ -6,6 +6,7 @@
 #define String    char *
 #define Widget	  void *
 #define	PSImagePtr void *
+#define XtInputId void *
 
 /* Default values, size limiting values.
  */
@@ -326,6 +327,6 @@ typedef struct {
 #define max(a,b)	((a)<(b)?(b):(a))
 #endif
 
-void xim_iisio(); 
+void xim_iisio (IoChanPtr chan, int *fd_addr, void *id_addr);
 
 #endif

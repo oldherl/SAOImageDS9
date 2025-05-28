@@ -16,7 +16,7 @@ void xim_message(XimDataPtr, char*, char*);
 void xim_initFrame(XimDataPtr, int, int, FbConfig*, char*);
 void xim_setCursorPos(XimDataPtr, int, int);
 void xim_eraseFrame(XimDataPtr, int);
-int xim_addInput(XimDataPtr, int, void (*func)(IoChan*, int*, void*), IoChan*);
+int xim_addInput(XimDataPtr, int, void (*func)(IoChanPtr, int*, void*), IoChan*);
 void xim_wcs(int, float, float, float, float, float, float, float, float, int);
 
 #ifdef __WIN32

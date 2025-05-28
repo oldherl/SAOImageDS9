@@ -36,7 +36,6 @@
 #define	CMS_CYAN	208
 #define	CMS_MAGENTA	209
 
-#define XtInputId void *
 #define XtNumber(x) MAX_CLIENTS
 
 /*
@@ -97,17 +96,21 @@ static int *wcspix_enabled = NULL;
 	
 static	int iis_debug = -1;				/* protocol debug */
 
-static void set_fbconfig(), add_mapping();
-static void xim_connectClient(), xim_disconnectClient();
-static int chan_read(), chan_write(), decode_frameno();
+static void set_fbconfig(IoChanPtr chan, int config, int frame);
+static void add_mapping (XimDataPtr xim, CtranPtr ctran, char* wcsbuf, FrameBufPtr fr);
+static void xim_connectClient(IoChanPtr chan_port, int *source, XtPointer id);
+static void xim_disconnectClient(IoChanPtr chan);
+static int chan_read(int fd, void* vptr, int nbytes);
+static int chan_write (int fd, void* vptr, int nbytes);
+static int decode_frameno(int z);
 
-static CtranPtr wcs_update();
-static IoChanPtr open_fifo();
-static IoChanPtr open_inet();
+static CtranPtr wcs_update(XimDataPtr xim, FrameBufPtr fr);
+static IoChanPtr open_fifo(XimDataPtr xim);
+static IoChanPtr open_inet(XimDataPtr xim);
 #ifdef HAVE_SYS_UN_H
-static IoChanPtr open_unix();
+static IoChanPtr open_unix(XimDataPtr xim);
 #endif
-static IoChanPtr get_iochan();
+static IoChanPtr get_iochan(XimDataPtr xim);
 static MappingPtr xim_getMapping(XimDataPtr, float, float, int);
 static void print_mappings(FrameBufPtr fr);
 #ifndef __WIN32
@@ -493,7 +496,7 @@ static IoChanPtr get_iochan(XimDataPtr xim)
 /* XIM_IISIO -- Xt file i/o callback procedure, called when there is input
  * pending on the data stream to the ximtool client.
  */
-void xim_iisio (IoChanPtr chan, int *fd_addr, XtInputId *id_addr)
+void xim_iisio (IoChanPtr chan, int *fd_addr, void *id_addr)
 {
   XimDataPtr xim = (XimDataPtr) chan->xim;
   MappingPtr mp = (MappingPtr) NULL;
