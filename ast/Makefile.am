@@ -667,6 +667,10 @@ else
 threadsafe =
 endif
 
+# Because some ast source files are not ready for C23 (function with
+# unspecified number of parameters), we are using C17 only.
+AM_CFLAGS += -std=c17
+
 # Make all library code position independent by default. This is handy for
 # creating shareable libraries from the static ones (Java JNI libraries).
 # Note we do not simply set the AM_CFLAGS variable, as this would also
