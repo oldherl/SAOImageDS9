@@ -13,16 +13,7 @@
  * SCCS: @(#) fixstrtod.c 1.5 96/02/15 12:08:21
  */
 
-#include <stdio.h>
-
-#undef strtod
-
-/*
- * Declare strtod explicitly rather than including stdlib.h, since in
- * somes systems (e.g. SunOS 4.1.4) stdlib.h doesn't declare strtod.
- */
-
-extern double strtod();
+#include <stdlib.h>
 
 double
 fixstrtod(string, endPtr)
