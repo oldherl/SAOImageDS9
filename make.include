@@ -412,8 +412,8 @@ ast/.libs/libast.a :
 	@echo "*** $@ ***"
 	$(MAKE) -C ast -j ast.h
 	cp ast/ast.h $(includedir)/.
-	cp ast/grf.h $(includedir)/.
-	cp ast/grf3d.h $(includedir)/.
+	cp ast/src/grf.h $(includedir)/.
+	cp ast/src/grf3d.h $(includedir)/.
 
 ast/.libs/libast_err.a :
 	@echo ""
